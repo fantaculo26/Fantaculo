@@ -5,108 +5,2117 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#f4f5f1">
-<title>FantaSquadra v8</title>
+<title>FantaSquadra</title>
+
 <style>
-:root{--bg:#f4f5f1;--card:#fff;--ink:#111713;--muted:#6e766f;--line:#dfe4df;--green:#173f2a;--soft:#edf5ef;--danger:#b42318;--shadow:0 12px 30px rgba(17,23,19,.08)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-body{padding:env(safe-area-inset-top) env(safe-area-inset-right) calc(78px + env(safe-area-inset-bottom)) env(safe-area-inset-left)}
-button,input,select{font:inherit}.app{max-width:1280px;margin:auto;padding:18px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
-.brand{font-weight:900;font-size:24px}.sub,.muted{color:var(--muted)}.sub{font-size:13px}.pill,.btn{border:0;border-radius:12px;padding:10px 12px;font-weight:800}.pill,.primary{background:var(--green);color:#fff}.soft{background:var(--soft);color:var(--green)}.danger{background:#fff1f0;color:var(--danger)}
-.card{background:#fff;border-radius:22px;padding:18px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.05)}h1,h2,p{margin-top:0}h1{font-size:30px;margin-bottom:8px}h2{font-size:20px}
-.grid{display:grid;gap:14px}.league-list,.team-cards,.player-list{display:grid;gap:10px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:16px;padding:14px}.row.active{border:2px solid var(--green)}.actions{display:flex;gap:8px;flex-wrap:wrap}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--soft);border-radius:16px;padding:14px}.stat b{display:block;font-size:24px}.notice{background:#fff8dc;border:1px solid #eadc98;border-radius:14px;padding:12px;font-size:13px;line-height:1.4}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}
-.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:800}.chip.active{background:var(--green);color:#fff}.search,.field input,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff}.field{margin-bottom:12px}label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin-bottom:6px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.player{border:1px solid var(--line);border-radius:15px;padding:12px;background:#fff;text-align:left}.player.sold{background:#e5e7eb;opacity:.75}.player-name{font-weight:850}.meta{font-size:12px;color:var(--muted);margin-top:3px}.role{display:inline-flex;min-width:28px;height:28px;align-items:center;justify-content:center;border-radius:999px;background:var(--green);color:white;font-weight:900}.big{font-size:36px;font-weight:900}
-.auction{display:grid;gap:14px}.player-list{max-height:62vh;overflow:auto}.selected{position:sticky;top:12px}
-table{width:100%;border-collapse:collapse}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}th{font-size:12px;color:var(--muted)}
-.bottomnav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:50}.navinner{display:grid;grid-template-columns:repeat(5,1fr);max-width:760px;margin:auto}.navbtn{border:0;background:transparent;border-radius:12px;padding:9px 5px;font-weight:800;color:var(--muted);font-size:12px}.navbtn.active{background:var(--soft);color:var(--green)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:flex-end;justify-content:center;z-index:100;padding:16px}.modal.open{display:flex}.sheet{width:min(680px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:24px;padding:18px}.sheethead{display:flex;justify-content:space-between;align-items:center}.x{border:0;border-radius:999px;width:36px;height:36px}.hidden{display:none!important}
-@media(min-width:900px){.homegrid{grid-template-columns:1.2fr .8fr}.auction{grid-template-columns:38% 62%}.stats{grid-template-columns:repeat(4,1fr)}.team-cards{grid-template-columns:repeat(2,1fr)}}
+:root{
+  --bg:#f4f5f1;
+  --card:#ffffff;
+  --ink:#101512;
+  --muted:#747c76;
+  --line:#dfe4df;
+  --green:#173f2a;
+  --green2:#2f7d4d;
+  --soft:#edf5ef;
+  --red:#b42318;
+  --gold:#a46d00;
+  --shadow:0 10px 30px rgba(20,35,26,.07);
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+body{
+  padding:
+    env(safe-area-inset-top)
+    env(safe-area-inset-right)
+    calc(82px + env(safe-area-inset-bottom))
+    env(safe-area-inset-left);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:1280px;margin:auto;padding:18px}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:16px;
+}
+.brand{font-size:27px;font-weight:900;letter-spacing:-.7px}
+.subtitle{font-size:13px;color:var(--muted);margin-top:2px}
+
+.card{
+  background:var(--card);
+  border:1px solid rgba(0,0,0,.05);
+  border-radius:22px;
+  padding:18px;
+  box-shadow:var(--shadow);
+}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:30px;margin-bottom:7px}
+h2{font-size:20px}
+.muted{color:var(--muted)}
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:11px 14px;
+  font-weight:800;
+}
+.primary{background:var(--green);color:#fff}
+.soft{background:var(--soft);color:var(--green)}
+.danger{background:#fff0ef;color:var(--red)}
+.full{width:100%}
+
+.grid{display:grid;gap:14px}
+.league-list{display:grid;gap:10px;margin-top:15px}
+.league{
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.league.active{border:2px solid var(--green)}
+.league-name{font-weight:850}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.stat{
+  padding:14px;
+  border-radius:17px;
+  background:var(--soft);
+}
+.stat span{display:block;color:var(--muted);font-size:13px}
+.stat b{display:block;font-size:25px;margin-top:3px}
+
+.empty{
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+  border:1px dashed var(--line);
+  border-radius:17px;
+}
+
+.auction-layout{display:grid;gap:14px}
+.sticky{position:sticky;top:12px}
+
+.chips{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+.chip{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:850;
+}
+.chip.active{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
+
+.big{
+  font-size:38px;
+  font-weight:900;
+  letter-spacing:-1px;
+}
+.role{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:29px;
+  height:29px;
+  padding:0 7px;
+  background:var(--green);
+  color:#fff;
+  border-radius:999px;
+  font-weight:900;
+}
+
+.search,
+.field input,
+.field select{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:13px;
+  padding:12px 13px;
+}
+.field{margin-bottom:13px}
+label{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.player-list{
+  display:grid;
+  gap:8px;
+  margin-top:10px;
+  max-height:62vh;
+  overflow:auto;
+}
+.player{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:15px;
+  padding:12px;
+  text-align:left;
+}
+.player.selected-player{
+  border:2px solid var(--green);
+}
+.player.sold{
+  background:#e5e7eb;
+  opacity:.72;
+}
+.player-name{font-weight:850;font-size:16px}
+.meta{font-size:12px;color:var(--muted);margin-top:4px}
+
+.ai-box{
+  margin-top:13px;
+  padding:14px;
+  border-radius:16px;
+  background:#f1f5f2;
+  border:1px solid #dce8df;
+}
+.ai-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  font-weight:850;
+  margin-bottom:7px;
+}
+.ai-status{
+  font-size:12px;
+  color:var(--muted);
+}
+
+table{width:100%;border-collapse:collapse}
+th,td{
+  padding:10px 8px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:14px;
+}
+th{font-size:12px;color:var(--muted)}
+
+.team-grid{display:grid;gap:10px}
+.team-card{
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:14px;
+}
+.team-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.bottomnav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:40;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);
+  padding:8px 8px calc(8px + env(safe-area-inset-bottom));
+}
+.nav-inner{
+  max-width:760px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+.nav-btn{
+  border:0;
+  background:transparent;
+  border-radius:12px;
+  padding:10px 5px;
+  font-size:12px;
+  font-weight:850;
+  color:var(--muted);
+}
+.nav-btn.active{background:var(--soft);color:var(--green)}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(0,0,0,.42);
+  display:none;
+  justify-content:center;
+  align-items:flex-end;
+  padding:16px;
+}
+.modal.open{display:flex}
+.sheet{
+  width:min(680px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:24px;
+  padding:18px;
+}
+.sheet-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.close{
+  width:36px;
+  height:36px;
+  border:0;
+  border-radius:999px;
+  font-size:20px;
+}
+.hidden{display:none!important}
+
+@media(min-width:900px){
+  .home-grid{grid-template-columns:1.15fr .85fr}
+  .auction-layout{grid-template-columns:38% 62%}
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+  .app{padding:22px}
+}
 </style>
 </head>
+
 <body>
+
 <div class="app">
-<header class="topbar"><div><div class="brand">FantaSquadra</div><div class="sub" id="sub">Nessuna lega selezionata</div></div><button class="pill" id="newTop">+ Lega</button></header>
+
+<header class="topbar">
+  <div>
+    <div class="brand">FantaSquadra</div>
+    <div class="subtitle" id="subtitle">Nessuna lega selezionata</div>
+  </div>
+  <button class="btn primary" id="newLeagueTop">+ Lega</button>
+</header>
+
 <main>
-<section id="home" class="view">
-<div class="grid homegrid">
-<div class="card"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><h1>Le mie rose</h1><div class="muted">Crea, continua o elimina una lega.</div></div><button class="btn primary" id="newBtn">Nuova lega</button></div><div id="leagueList" class="league-list" style="margin-top:14px"></div></div>
-<div class="card"><h2>Stato progetto</h2><div class="notice"><b>Compatibile Safari/iPhone/iPad.</b> Questa build usa HTML/JS normali, senza base64, gzip o DecompressionStream.</div><div style="height:10px"></div><div class="notice"><b>Listone Gazzetta:</b> non viene inventato. Importalo in Giocatori tramite CSV. Finché non lo importi, trovi solo 4 giocatori DEMO.</div></div>
-</div>
-<div id="dash" class="card" style="margin-top:14px"></div>
+
+<section id="view-home" class="view">
+
+  <div class="grid home-grid">
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div>
+          <h1>Le mie rose</h1>
+          <div class="muted">Gestisci le tue leghe.</div>
+        </div>
+        <button class="btn primary" id="newLeagueHome">Nuova lega</button>
+      </div>
+
+      <div id="leagueList" class="league-list"></div>
+    </div>
+
+    <div class="card">
+      <h2>Strategia asta</h2>
+      <div class="muted">
+        Budget, slot e acquisti vengono ricalcolati durante l'asta.
+      </div>
+
+      <div id="homeStrategy" style="margin-top:15px"></div>
+    </div>
+
+  </div>
+
+  <div id="dashboard" class="card" style="margin-top:14px"></div>
+
 </section>
 
-<section id="auction" class="view hidden"><div id="auctionHost"></div></section>
-<section id="roster" class="view hidden"><div id="rosterHost"></div></section>
-<section id="players" class="view hidden"><div class="card"><h1>Giocatori</h1><div class="notice">CSV: colonne consigliate <b>name,team,role,tier,starter,tactical,quote</b>. role=P/D/C/A; tier=top/f1/f2/value/bet.</div><div class="two" style="margin-top:12px"><div class="field"><label>Importa CSV</label><input type="file" id="csv" accept=".csv,text/csv"></div><div class="field"><label>Cerca</label><input id="psearch" placeholder="Nome o squadra"></div></div><button class="btn soft" id="exportCsv">Esporta CSV</button><div id="ptable" style="margin-top:12px"></div></div></section>
-<section id="more" class="view hidden"><div class="card"><h1>Altro</h1><button class="btn soft" id="backup">Scarica backup JSON</button><div class="field" style="margin-top:12px"><label>Ripristina backup</label><input type="file" id="restore" accept=".json"></div></div></section>
+
+<section id="view-auction" class="view hidden">
+  <div id="auctionHost"></div>
+</section>
+
+
+<section id="view-roster" class="view hidden">
+  <div id="rosterHost"></div>
+</section>
+
+
+<section id="view-players" class="view hidden">
+
+  <div class="card">
+
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:center">
+      <div>
+        <h1>Giocatori</h1>
+        <div class="muted">Database utilizzato durante l'asta.</div>
+      </div>
+
+      <button class="btn soft" id="exportCsv">Esporta CSV</button>
+    </div>
+
+    <div class="two" style="margin-top:16px">
+
+      <div class="field">
+        <label>Importa database CSV</label>
+        <input type="file" id="csvInput" accept=".csv,text/csv">
+      </div>
+
+      <div class="field">
+        <label>Cerca</label>
+        <input id="playerSearch" placeholder="Nome o squadra">
+      </div>
+
+    </div>
+
+    <div id="playersTable"></div>
+
+  </div>
+
+</section>
+
+
+<section id="view-more" class="view hidden">
+
+  <div class="card">
+
+    <h1>Altro</h1>
+
+    <div class="field">
+      <button class="btn soft" id="backupBtn">Scarica backup</button>
+    </div>
+
+    <div class="field">
+      <label>Ripristina backup</label>
+      <input type="file" id="restoreInput" accept=".json,application/json">
+    </div>
+
+    <div class="field">
+      <button class="btn danger" id="resetBtn">
+        Cancella dati locali
+      </button>
+    </div>
+
+  </div>
+
+</section>
+
 </main>
 </div>
 
-<nav class="bottomnav"><div class="navinner">
-<button class="navbtn active" data-view="home">Home</button><button class="navbtn" data-view="auction">Asta</button><button class="navbtn" data-view="roster">Rosa</button><button class="navbtn" data-view="players">Giocatori</button><button class="navbtn" data-view="more">Altro</button>
-</div></nav>
 
-<div class="modal" id="leagueModal"><div class="sheet"><div class="sheethead"><h2>Nuova lega</h2><button class="x" data-close="leagueModal">×</button></div>
-<div class="field"><label>Nome lega</label><input id="fLeague" placeholder="Lega Amici"></div><div class="field"><label>Nome mia squadra</label><input id="fTeam" placeholder="La mia squadra"></div>
-<div class="two"><div class="field"><label>Budget</label><input id="fBudget" type="number" value="500"></div><div class="field"><label>Squadre totali</label><input id="fTeams" type="number" value="10"></div></div>
-<div class="two"><div class="field"><label>Portieri</label><input id="fP" type="number" value="3"></div><div class="field"><label>Difensori</label><input id="fD" type="number" value="8"></div></div>
-<div class="two"><div class="field"><label>Centrocampisti</label><input id="fC" type="number" value="8"></div><div class="field"><label>Attaccanti</label><input id="fA" type="number" value="6"></div></div>
-<button class="btn primary" id="saveLeague" style="width:100%">Salva lega</button></div></div>
+<nav class="bottomnav">
+<div class="nav-inner">
 
-<div class="modal" id="buyModal"><div class="sheet"><div class="sheethead"><h2>Assegna giocatore</h2><button class="x" data-close="buyModal">×</button></div><div id="buyName" style="font-size:22px;font-weight:900;margin-bottom:12px"></div><div class="two"><div class="field"><label>Prezzo</label><input id="buyPrice" type="number" value="1"></div><div class="field"><label>Squadra</label><select id="buyOwner"></select></div></div><button class="btn primary" id="confirmBuy" style="width:100%">Conferma</button></div></div>
+<button class="nav-btn active" data-view="home">Home</button>
+<button class="nav-btn" data-view="auction">Asta</button>
+<button class="nav-btn" data-view="roster">Rosa</button>
+<button class="nav-btn" data-view="players">Giocatori</button>
+<button class="nav-btn" data-view="more">Altro</button>
+
+</div>
+</nav>
+
+
+<div class="modal" id="leagueModal">
+
+<div class="sheet">
+
+<div class="sheet-head">
+<h2>Nuova lega</h2>
+<button class="close" data-close="leagueModal">×</button>
+</div>
+
+<div class="field">
+<label>Nome lega</label>
+<input id="fLeague" placeholder="Lega Amici">
+</div>
+
+<div class="field">
+<label>Nome tua squadra</label>
+<input id="fTeam" placeholder="La mia squadra">
+</div>
+
+<div class="two">
+
+<div class="field">
+<label>Budget</label>
+<input id="fBudget" type="number" value="500">
+</div>
+
+<div class="field">
+<label>Numero squadre</label>
+<input id="fTeams" type="number" value="10">
+</div>
+
+</div>
+
+<div class="two">
+
+<div class="field">
+<label>Portieri</label>
+<input id="fP" type="number" value="3">
+</div>
+
+<div class="field">
+<label>Difensori</label>
+<input id="fD" type="number" value="8">
+</div>
+
+</div>
+
+<div class="two">
+
+<div class="field">
+<label>Centrocampisti</label>
+<input id="fC" type="number" value="8">
+</div>
+
+<div class="field">
+<label>Attaccanti</label>
+<input id="fA" type="number" value="6">
+</div>
+
+</div>
+
+<button class="btn primary full" id="saveLeague">
+Salva lega
+</button>
+
+</div>
+</div>
+
+
+<div class="modal" id="buyModal">
+
+<div class="sheet">
+
+<div class="sheet-head">
+<h2>Assegna giocatore</h2>
+<button class="close" data-close="buyModal">×</button>
+</div>
+
+<div id="buyPlayerName"
+style="font-size:22px;font-weight:900;margin-bottom:15px"></div>
+
+<div class="two">
+
+<div class="field">
+<label>Prezzo finale</label>
+<input id="buyPrice" type="number" min="1" value="1">
+</div>
+
+<div class="field">
+<label>Squadra</label>
+<select id="buyOwner"></select>
+</div>
+
+</div>
+
+<button class="btn primary full" id="confirmBuy">
+Conferma acquisto
+</button>
+
+</div>
+</div>
+
 
 <script>
 (function(){
-"use strict";
-const KEY="fantasquadra_v8";
-const demos=[
-{id:"dp",name:"Demo Portiere",team:"DEMO",role:"P",tier:"f2",starter:"DEMO",tactical:"Portiere",quote:1,demo:true},
-{id:"dd",name:"Demo Difensore",team:"DEMO",role:"D",tier:"value",starter:"DEMO",tactical:"Terzino",quote:1,demo:true},
-{id:"dc",name:"Demo Centrocampista",team:"DEMO",role:"C",tier:"f1",starter:"DEMO",tactical:"Trequartista",quote:1,demo:true},
-{id:"da",name:"Demo Attaccante",team:"DEMO",role:"A",tier:"top",starter:"DEMO",tactical:"Punta",quote:1,demo:true}
-];
-let S=load(), role="P", selected=null;
-function load(){try{let r=localStorage.getItem(KEY);if(r)return JSON.parse(r)}catch(e){}return{activeLeagueId:null,leagues:[],players:demos.slice()}}
-function save(){localStorage.setItem(KEY,JSON.stringify(S))}
-function id(p){return p+"-"+Date.now()+"-"+Math.random().toString(36).slice(2,7)}
-function L(){return S.leagues.find(x=>x.id===S.activeLeagueId)||null}
-function esc(x){return String(x??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#39;')}
-function money(x){return Number(x||0).toLocaleString("it-IT")}
-function openM(x){document.getElementById(x).classList.add("open")} function closeM(x){document.getElementById(x).classList.remove("open")}
-function tier(t){return({top:"TOP",f1:"1ª FASCIA",f2:"2ª FASCIA",value:"VALUE",bet:"SCOMMESSA"}[t]||"—")}
-function roleCount(team,r){let ids=team.roster.map(x=>x.playerId);return S.players.filter(p=>ids.includes(p.id)&&p.role===r).length}
-function owned(pid,l){for(let t of l.teams){let r=t.roster.find(x=>x.playerId===pid);if(r)return{team:t,rec:r}}return null}
-function maxBid(p,l,me){let rem=Object.entries(l.slots).reduce((s,[r,n])=>s+Math.max(0,n-roleCount(me,r)),0);if(l.slots[p.role]-roleCount(me,p.role)<=0)return 0;let reserve=Math.max(0,rem-1),hard=Math.max(1,me.budgetLeft-reserve),mult={top:.45,f1:.26,f2:.16,value:.09,bet:.05}[p.tier]||.08;return Math.min(hard,Math.max(1,Math.floor(me.budgetLeft*mult)))}
 
-function renderHome(){let l=L(),list=document.getElementById("leagueList");document.getElementById("sub").textContent=l?l.name+" · "+l.teams.find(t=>t.isMine).name:"Nessuna lega selezionata";
-list.innerHTML=S.leagues.length?S.leagues.map(x=>{let me=x.teams.find(t=>t.isMine);return`<div class="row ${x.id===S.activeLeagueId?"active":""}"><div><b>${esc(x.name)}</b><div class="meta">${esc(me.name)} · ${money(me.budgetLeft)} crediti</div></div><div class="actions"><button class="btn soft" data-openleague="${x.id}">Apri</button><button class="btn danger" data-delete="${x.id}">Elimina</button></div></div>`}).join(""):'<div class="empty">Nessuna lega. Creane una.</div>';
-let d=document.getElementById("dash");if(!l){d.innerHTML='<div class="empty">Seleziona una lega per vedere il riepilogo.</div>';return}let me=l.teams.find(t=>t.isMine),slots=Object.values(l.slots).reduce((a,b)=>a+b,0);d.innerHTML=`<h2>${esc(l.name)}</h2><div class="stats"><div class="stat"><span class="muted">Budget</span><b>${money(me.budgetLeft)}</b></div><div class="stat"><span class="muted">Speso</span><b>${money(me.budgetStart-me.budgetLeft)}</b></div><div class="stat"><span class="muted">Giocatori</span><b>${me.roster.length}</b></div><div class="stat"><span class="muted">Mancano</span><b>${Math.max(0,slots-me.roster.length)}</b></div></div>`}
-function newLeague(){["fLeague","fTeam"].forEach(x=>document.getElementById(x).value="");openM("leagueModal")}
-function saveLeague(){let name=document.getElementById("fLeague").value.trim()||"Nuova Lega",tn=document.getElementById("fTeam").value.trim()||"La mia squadra",budget=Math.max(1,+document.getElementById("fBudget").value||500),n=Math.max(2,+document.getElementById("fTeams").value||10),slots={P:+document.getElementById("fP").value||3,D:+document.getElementById("fD").value||8,C:+document.getElementById("fC").value||8,A:+document.getElementById("fA").value||6},teams=[{id:id("t"),name:tn,isMine:true,budgetStart:budget,budgetLeft:budget,roster:[]}];for(let i=2;i<=n;i++)teams.push({id:id("t"),name:"Avversario "+i,isMine:false,budgetStart:budget,budgetLeft:budget,roster:[]});let l={id:id("l"),name,budgetStart:budget,slots,teams};S.leagues.push(l);S.activeLeagueId=l.id;save();closeM("leagueModal");renderAll()}
-function renderAuction(){let l=L(),h=document.getElementById("auctionHost");if(!l){h.innerHTML='<div class="card empty">Crea o seleziona una lega.</div>';return}let me=l.teams.find(t=>t.isMine),q=(document.getElementById("asearch")?.value||"").toLowerCase(),ps=S.players.filter(p=>p.role===role&&(!q||p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)));let p=S.players.find(x=>x.id===selected&&x.role===role)||ps[0]||null;if(p)selected=p.id;let max=p?maxBid(p,l,me):0;
-h.innerHTML=`<div class="auction"><div class="card selected"><h2>Asta Live</h2><div class="chips">${["P","D","C","A"].map(r=>`<button class="chip ${r===role?"active":""}" data-role="${r}">${r}</button>`).join("")}</div><div style="height:12px"></div><div class="muted">Budget</div><div class="big">${money(me.budgetLeft)}</div><div class="muted">Slot ${role} mancanti: <b>${Math.max(0,l.slots[role]-roleCount(me,role))}</b></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0">${p?`<div class="meta">${esc(p.team)} · ${tier(p.tier)}</div><h1>${esc(p.name)}</h1><div class="stats"><div class="stat"><span class="muted">Target</span><b>${Math.max(1,Math.floor(max*.72))}</b></div><div class="stat"><span class="muted">MAX</span><b>${max}</b></div></div><div style="height:10px"></div><div class="notice">MAX dinamico basato su budget residuo, slot ancora da riempire e fascia.</div><div style="height:12px"></div><button class="btn primary" id="buy" style="width:100%">Assegna / compra</button>`:'<div class="empty">Nessun giocatore.</div>'}</div><div class="card"><h2>Giocatori ${role}</h2><input class="search" id="asearch" value="${esc(q)}" placeholder="Cerca"><div class="player-list" style="margin-top:10px">${ps.map(x=>{let o=owned(x.id,l);return`<button class="player ${o?"sold":""}" data-player="${x.id}"><div class="player-name">${esc(x.name)} ${x.demo?'<span class="meta">(DEMO)</span>':''}</div><div class="meta">${esc(x.team)} · ${tier(x.tier)} · ${esc(x.tactical||"")}</div>${o?`<div class="meta">✓ VENDUTO a ${esc(o.team.name)} · ${money(o.rec.price)}</div>`:""}</button>`}).join("")||'<div class="empty">Importa il listone CSV.</div>'}</div></div></div>`;let s=document.getElementById("asearch");if(s)s.oninput=renderAuction}
-function openBuy(){let l=L(),p=S.players.find(x=>x.id===selected);if(!l||!p)return;if(owned(p.id,l)){alert("Giocatore già venduto.");return}document.getElementById("buyName").textContent=p.name+" · "+p.team;document.getElementById("buyPrice").value=1;document.getElementById("buyOwner").innerHTML=l.teams.map(t=>`<option value="${t.id}">${esc(t.name)} · ${money(t.budgetLeft)}</option>`).join("");openM("buyModal")}
-function confirmBuy(){let l=L(),p=S.players.find(x=>x.id===selected),ownerId=document.getElementById("buyOwner").value,t=l.teams.find(x=>x.id===ownerId),price=Math.max(1,+document.getElementById("buyPrice").value||1);if(price>t.budgetLeft){alert("Budget insufficiente.");return}if(t.isMine&&roleCount(t,p.role)>=l.slots[p.role]){alert("Slot ruolo già pieni.");return}t.budgetLeft-=price;t.roster.push({playerId:p.id,price});save();closeM("buyModal");renderAll()}
-function renderRoster(){let l=L(),h=document.getElementById("rosterHost");if(!l){h.innerHTML='<div class="card empty">Nessuna lega selezionata.</div>';return}h.innerHTML=`<div class="card"><h1>Rose della lega</h1><div class="team-cards">${l.teams.map(t=>`<div class="card" style="box-shadow:none"><div style="display:flex;justify-content:space-between"><b>${esc(t.name)}${t.isMine?" · TU":""}</b><b>${money(t.budgetLeft)}</b></div><table><thead><tr><th>R</th><th>Giocatore</th><th>Prezzo</th></tr></thead><tbody>${t.roster.map(r=>{let p=S.players.find(x=>x.id===r.playerId);return p?`<tr><td><span class="role">${p.role}</span></td><td><b>${esc(p.name)}</b><div class="meta">${esc(p.team)}</div></td><td>${money(r.price)}</td></tr>`:""}).join("")||'<tr><td colspan="3" class="muted">Nessun acquisto</td></tr>'}</tbody></table></div>`).join("")}</div></div>`}
-function renderPlayers(){let q=(document.getElementById("psearch")?.value||"").toLowerCase(),rows=S.players.filter(p=>!q||p.name.toLowerCase().includes(q)||p.team.toLowerCase().includes(q)).map(p=>`<tr><td><span class="role">${p.role}</span></td><td><b>${esc(p.name)}</b>${p.demo?' <span class="meta">(DEMO)</span>':''}<div class="meta">${esc(p.team)} · ${tier(p.tier)}</div></td><td>${esc(p.starter||"—")}</td><td>${esc(p.tactical||"—")}</td><td>${money(p.quote||0)}</td></tr>`).join("");document.getElementById("ptable").innerHTML=`<table><thead><tr><th>R</th><th>Giocatore</th><th>Titolarità</th><th>Ruolo reale</th><th>Q.</th></tr></thead><tbody>${rows}</tbody></table>`;document.getElementById("psearch").oninput=renderPlayers}
-function parseCSV(text){let lines=String(text).split(/\r?\n/).filter(Boolean);if(lines.length<2)return[];let split=line=>{let o=[],c="",q=false;for(let i=0;i<line.length;i++){let x=line[i];if(x=='"'){if(q&&line[i+1]=='"'){c+='"';i++}else q=!q}else if((x==","||x==";")&&!q){o.push(c.trim());c=""}else c+=x}o.push(c.trim());return o},heads=split(lines[0]).map(x=>x.toLowerCase());return lines.slice(1).map(line=>{let v=split(line),o={};heads.forEach((h,i)=>o[h]=v[i]||"");let r=(o.role||o.ruolo||"").toUpperCase(),name=o.name||o.nome;if(!name||!["P","D","C","A"].includes(r))return null;return{id:id("p"),name,team:o.team||o.squadra||"",role:r,tier:(o.tier||o.fascia||"value").toLowerCase(),starter:o.starter||o.titolarita||"",tactical:o.tactical||o.ruoloreale||o.ruolo_reale||"",quote:+o.quote||+o.quotazione||0}}).filter(Boolean)}
-function importCSV(file){let r=new FileReader;r.onload=()=>{let a=parseCSV(r.result);if(!a.length){alert("CSV non riconosciuto.");return}S.players=a;save();renderAll();alert("Importati "+a.length+" giocatori.")};r.readAsText(file)}
-function download(name,text,type){let a=document.createElement("a"),u=URL.createObjectURL(new Blob([text],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),500)}
-function exportCSV(){let rows=[["name","team","role","tier","starter","tactical","quote"],...S.players.map(p=>[p.name,p.team,p.role,p.tier,p.starter,p.tactical,p.quote])];download("fantasquadra-giocatori.csv",rows.map(r=>r.map(x=>`"${String(x??"").replace(/"/g,'""')}"`).join(",")).join("\n"),"text/csv")}
-function renderAll(){renderHome();renderAuction();renderRoster();renderPlayers()}
-function view(v){document.querySelectorAll(".view").forEach(x=>x.classList.add("hidden"));document.getElementById(v).classList.remove("hidden");document.querySelectorAll(".navbtn").forEach(b=>b.classList.toggle("active",b.dataset.view===v));if(v==="auction")renderAuction();if(v==="roster")renderRoster();if(v==="players")renderPlayers()}
-document.addEventListener("click",e=>{let b=e.target.closest("button");if(!b)return;if(b.dataset.view)view(b.dataset.view);if(b.dataset.close)closeM(b.dataset.close);if(b.dataset.openleague){S.activeLeagueId=b.dataset.openleague;save();renderAll()}if(b.dataset.delete){if(confirm("Eliminare la lega?")){S.leagues=S.leagues.filter(x=>x.id!==b.dataset.delete);if(S.activeLeagueId===b.dataset.delete)S.activeLeagueId=S.leagues[0]?.id||null;save();renderAll()}}if(b.dataset.role){role=b.dataset.role;selected=null;renderAuction()}if(b.dataset.player){selected=b.dataset.player;renderAuction()}if(b.id==="buy")openBuy()});
-document.getElementById("newBtn").onclick=newLeague;
-document.getElementById("newTop").onclick=newLeague;
-document.getElementById("saveLeague").onclick=saveLeague;
-document.getElementById("confirmBuy").onclick=confirmBuy;
-document.getElementById("csv").onchange=e=>e.target.files[0]&&importCSV(e.target.files[0]);
-document.getElementById("exportCsv").onclick=exportCSV;
-document.getElementById("backup").onclick=()=>download("fantasquadra-backup.json",JSON.stringify(S,null,2),"application/json");
-document.getElementById("restore").onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader;r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.leagues||!x.players)throw 0;localStorage.setItem(KEY,JSON.stringify(x));location.reload()}catch(_){alert("Backup non valido.")}};r.readAsText(f)};
+"use strict";
+
+const STORAGE_KEY="fantasquadra_app_v10";
+
+let state=loadState();
+
+let activeRole="P";
+let selectedPlayerId=null;
+
+
+/* =========================
+   ARCHIVIO
+========================= */
+
+function defaultState(){
+  return{
+    activeLeagueId:null,
+    leagues:[],
+    players:[]
+  };
+}
+
+function loadState(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+
+    if(raw){
+      return JSON.parse(raw);
+    }
+
+    /*
+      Recupero automatico dati della precedente v8.
+      Evita di perdere la lega già creata.
+    */
+
+    const old=localStorage.getItem("fantasquadra_v8");
+
+    if(old){
+      const converted=JSON.parse(old);
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(converted)
+      );
+      return converted;
+    }
+
+  }catch(e){}
+
+  return defaultState();
+}
+
+function saveState(){
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(state)
+  );
+}
+
+
+/* =========================
+   UTILITÀ
+========================= */
+
+function uid(prefix){
+  return prefix+"-"+Date.now()+"-"+Math.random().toString(36).slice(2,8);
+}
+
+function league(){
+  return state.leagues.find(
+    x=>x.id===state.activeLeagueId
+  )||null;
+}
+
+function escapeHtml(value){
+  return String(value??"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;");
+}
+
+function credits(v){
+  return Number(v||0).toLocaleString("it-IT");
+}
+
+function roleLabel(r){
+  return({
+    P:"Portieri",
+    D:"Difensori",
+    C:"Centrocampisti",
+    A:"Attaccanti"
+  })[r]||r;
+}
+
+function tierLabel(t){
+  return({
+    top:"TOP",
+    f1:"1ª FASCIA",
+    f2:"2ª FASCIA",
+    value:"VALUE",
+    bet:"SCOMMESSA"
+  })[t]||"—";
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add("open");
+}
+
+function closeModal(id){
+  document.getElementById(id).classList.remove("open");
+}
+
+
+/* =========================
+   LEGHE
+========================= */
+
+function createLeague(){
+
+  document.getElementById("fLeague").value="";
+  document.getElementById("fTeam").value="";
+
+  openModal("leagueModal");
+}
+
+function saveLeague(){
+
+  const leagueName=
+    document.getElementById("fLeague").value.trim()
+    ||"Nuova Lega";
+
+  const teamName=
+    document.getElementById("fTeam").value.trim()
+    ||"La mia squadra";
+
+  const budget=Math.max(
+    1,
+    Number(document.getElementById("fBudget").value)||500
+  );
+
+  const totalTeams=Math.max(
+    2,
+    Number(document.getElementById("fTeams").value)||10
+  );
+
+  const slots={
+    P:Number(document.getElementById("fP").value)||3,
+    D:Number(document.getElementById("fD").value)||8,
+    C:Number(document.getElementById("fC").value)||8,
+    A:Number(document.getElementById("fA").value)||6
+  };
+
+  const teams=[{
+    id:uid("team"),
+    name:teamName,
+    isMine:true,
+    budgetStart:budget,
+    budgetLeft:budget,
+    roster:[]
+  }];
+
+  for(let i=2;i<=totalTeams;i++){
+
+    teams.push({
+      id:uid("team"),
+      name:"Avversario "+i,
+      isMine:false,
+      budgetStart:budget,
+      budgetLeft:budget,
+      roster:[]
+    });
+
+  }
+
+  const newLeague={
+    id:uid("league"),
+    name:leagueName,
+    budgetStart:budget,
+    slots,
+    teams,
+    createdAt:Date.now()
+  };
+
+  state.leagues.push(newLeague);
+  state.activeLeagueId=newLeague.id;
+
+  saveState();
+  closeModal("leagueModal");
+
+  renderAll();
+}
+
+function deleteLeague(id){
+
+  if(!confirm("Eliminare questa lega?")){
+    return;
+  }
+
+  state.leagues=
+    state.leagues.filter(x=>x.id!==id);
+
+  if(state.activeLeagueId===id){
+    state.activeLeagueId=
+      state.leagues[0]?.id||null;
+  }
+
+  saveState();
+  renderAll();
+}
+
+
+/* =========================
+   ROSA / ACQUISTI
+========================= */
+
+function roleCount(team,role){
+
+  const ids=team.roster.map(x=>x.playerId);
+
+  return state.players.filter(
+    p=>ids.includes(p.id)&&p.role===role
+  ).length;
+}
+
+function playerOwner(playerId,l){
+
+  for(const team of l.teams){
+
+    const rec=team.roster.find(
+      x=>x.playerId===playerId
+    );
+
+    if(rec){
+      return{
+        team,
+        record:rec
+      };
+    }
+
+  }
+
+  return null;
+}
+
+
+/* =========================
+   STRATEGIA LOCALE
+========================= */
+
+function remainingSlots(l,team){
+
+  return Object.entries(l.slots)
+    .reduce(
+      (sum,[role,total])=>
+        sum+Math.max(
+          0,
+          total-roleCount(team,role)
+        ),
+      0
+    );
+}
+
+function maxBid(player,l,me){
+
+  const roleRemaining=
+    Math.max(
+      0,
+      l.slots[player.role]-
+      roleCount(me,player.role)
+    );
+
+  if(roleRemaining===0){
+    return 0;
+  }
+
+  const remaining=
+    remainingSlots(l,me);
+
+  const mandatoryReserve=
+    Math.max(0,remaining-1);
+
+  const hardLimit=
+    Math.max(
+      1,
+      me.budgetLeft-mandatoryReserve
+    );
+
+  const weights={
+    top:.45,
+    f1:.27,
+    f2:.17,
+    value:.10,
+    bet:.06
+  };
+
+  const weight=
+    weights[player.tier]||.08;
+
+  const strategicLimit=
+    Math.max(
+      1,
+      Math.floor(me.budgetLeft*weight)
+    );
+
+  return Math.min(
+    hardLimit,
+    strategicLimit
+  );
+}
+
+function localStrategySummary(l,me){
+
+  const remain=remainingSlots(l,me);
+
+  if(remain===0){
+    return "Rosa completa.";
+  }
+
+  const avg=
+    Math.floor(
+      me.budgetLeft/remain
+    );
+
+  let message=
+    "Hai "+credits(me.budgetLeft)+
+    " crediti per "+remain+
+    " slot. Media disponibile: "+
+    avg+" crediti per acquisto.";
+
+  if(me.budgetLeft/me.budgetStart>.70){
+    message+=" Hai ancora ampia capacità di spesa.";
+  }
+
+  if(me.budgetLeft/me.budgetStart<.40){
+    message+=" Budget contratto: aumenta la selettività sui rilanci.";
+  }
+
+  return message;
+}
+
+
+/* =========================
+   FUTURA STRATEGIA AI
+========================= */
+
+async function requestAIStrategy(){
+
+  const l=league();
+
+  if(!l){
+    return;
+  }
+
+  const box=document.getElementById("aiText");
+
+  if(!box){
+    return;
+  }
+
+  box.textContent="Analisi in corso…";
+
+  const me=l.teams.find(t=>t.isMine);
+
+  const player=
+    state.players.find(
+      p=>p.id===selectedPlayerId
+    )||null;
+
+  const payload={
+    league:l,
+    myTeam:me,
+    selectedPlayer:player,
+    activeRole,
+    timestamp:Date.now()
+  };
+
+  try{
+
+    const response=await fetch(
+      "/api/strategy",
+      {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(payload)
+      }
+    );
+
+    if(!response.ok){
+      throw new Error();
+    }
+
+    const data=await response.json();
+
+    box.textContent=
+      data.analysis||
+      data.message||
+      "Analisi completata.";
+
+  }catch(e){
+
+    box.textContent=
+      "Assistente AI non ancora collegato. "+
+      "La strategia locale continua a funzionare.";
+
+  }
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome(){
+
+  const list=
+    document.getElementById("leagueList");
+
+  const l=league();
+
+  document.getElementById("subtitle").textContent=
+    l
+    ? l.name+" · "+l.teams.find(t=>t.isMine).name
+    : "Nessuna lega selezionata";
+
+  if(!state.leagues.length){
+
+    list.innerHTML=
+      '<div class="empty">'+
+      'Nessuna lega presente.'+
+      '</div>';
+
+  }else{
+
+    list.innerHTML=
+      state.leagues.map(item=>{
+
+        const me=
+          item.teams.find(t=>t.isMine);
+
+        return `
+        <div class="league ${item.id===state.activeLeagueId?"active":""}">
+
+          <div>
+            <div class="league-name">
+              ${escapeHtml(item.name)}
+            </div>
+
+            <div class="meta">
+              ${escapeHtml(me.name)}
+              · ${credits(me.budgetLeft)} crediti
+            </div>
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="btn soft"
+              data-open-league="${item.id}">
+              Apri
+            </button>
+
+            <button
+              class="btn danger"
+              data-delete-league="${item.id}">
+              Elimina
+            </button>
+
+          </div>
+
+        </div>
+        `;
+
+      }).join("");
+
+  }
+
+  const dash=
+    document.getElementById("dashboard");
+
+  const strategy=
+    document.getElementById("homeStrategy");
+
+  if(!l){
+
+    dash.innerHTML=
+      '<div class="empty">'+
+      'Crea o seleziona una lega.'+
+      '</div>';
+
+    strategy.innerHTML=
+      '<div class="empty">'+
+      'La strategia apparirà qui.'+
+      '</div>';
+
+    return;
+  }
+
+  const me=
+    l.teams.find(t=>t.isMine);
+
+  const totalSlots=
+    Object.values(l.slots)
+    .reduce((a,b)=>a+b,0);
+
+  dash.innerHTML=`
+
+    <h2>${escapeHtml(l.name)}</h2>
+
+    <div class="stats">
+
+      <div class="stat">
+        <span>Budget</span>
+        <b>${credits(me.budgetLeft)}</b>
+      </div>
+
+      <div class="stat">
+        <span>Speso</span>
+        <b>${credits(me.budgetStart-me.budgetLeft)}</b>
+      </div>
+
+      <div class="stat">
+        <span>Giocatori</span>
+        <b>${me.roster.length}</b>
+      </div>
+
+      <div class="stat">
+        <span>Mancano</span>
+        <b>${Math.max(0,totalSlots-me.roster.length)}</b>
+      </div>
+
+    </div>
+  `;
+
+  strategy.innerHTML=`
+    <div class="ai-box">
+      ${escapeHtml(localStrategySummary(l,me))}
+    </div>
+  `;
+}
+
+
+/* =========================
+   ASTA
+========================= */
+
+function renderAuction(){
+
+  const host=
+    document.getElementById("auctionHost");
+
+  const l=league();
+
+  if(!l){
+
+    host.innerHTML=
+      '<div class="card empty">'+
+      'Seleziona una lega prima di iniziare l’asta.'+
+      '</div>';
+
+    return;
+  }
+
+  const me=
+    l.teams.find(t=>t.isMine);
+
+  const search=
+    (
+      document.getElementById("auctionSearch")
+      ?.value||""
+    ).toLowerCase();
+
+  const players=
+    state.players.filter(p=>
+      p.role===activeRole &&
+      (
+        !search ||
+        p.name.toLowerCase().includes(search) ||
+        p.team.toLowerCase().includes(search)
+      )
+    );
+
+  let selected=
+    state.players.find(
+      p=>p.id===selectedPlayerId
+    );
+
+  if(!selected || selected.role!==activeRole){
+    selected=players[0]||null;
+  }
+
+  if(selected){
+    selectedPlayerId=selected.id;
+  }
+
+  const max=
+    selected
+    ? maxBid(selected,l,me)
+    : 0;
+
+  const target=
+    selected
+    ? Math.max(1,Math.floor(max*.72))
+    : 0;
+
+  host.innerHTML=`
+
+  <div class="auction-layout">
+
+    <div class="card sticky">
+
+      <h2>Asta Live</h2>
+
+      <div class="chips">
+
+        ${["P","D","C","A"].map(r=>`
+          <button
+            class="chip ${r===activeRole?"active":""}"
+            data-role="${r}">
+            ${r}
+          </button>
+        `).join("")}
+
+      </div>
+
+      <div style="height:15px"></div>
+
+      <div class="muted">Budget residuo</div>
+      <div class="big">${credits(me.budgetLeft)}</div>
+
+      <div class="meta">
+        ${roleLabel(activeRole)} mancanti:
+        <b>
+          ${Math.max(
+            0,
+            l.slots[activeRole]-
+            roleCount(me,activeRole)
+          )}
+        </b>
+      </div>
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:17px 0">
+
+      ${
+        selected
+        ?`
+
+        <div class="meta">
+          ${escapeHtml(selected.team)}
+          · ${tierLabel(selected.tier)}
+        </div>
+
+        <h1>${escapeHtml(selected.name)}</h1>
+
+        <div class="stats">
+
+          <div class="stat">
+            <span>Target</span>
+            <b>${target}</b>
+          </div>
+
+          <div class="stat">
+            <span>MAX</span>
+            <b>${max}</b>
+          </div>
+
+        </div>
+
+        <div class="ai-box">
+
+          <div class="ai-title">
+            <span>Strategia</span>
+            <span class="ai-status">AI pronta</span>
+          </div>
+
+          <div id="aiText">
+            ${escapeHtml(localStrategySummary(l,me))}
+          </div>
+
+          <div style="height:10px"></div>
+
+          <button
+            class="btn soft full"
+            id="askAI">
+            Analizza strategia
+          </button>
+
+        </div>
+
+        <div style="height:12px"></div>
+
+        <button
+          class="btn primary full"
+          id="buyButton">
+          Assegna / compra
+        </button>
+
+        `
+        :`
+        <div class="empty">
+          Nessun giocatore disponibile.
+        </div>
+        `
+      }
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>
+        ${roleLabel(activeRole)}
+      </h2>
+
+      <input
+        id="auctionSearch"
+        class="search"
+        value="${escapeHtml(search)}"
+        placeholder="Cerca giocatore o squadra">
+
+      <div class="player-list">
+
+      ${
+        players.length
+        ?players.map(p=>{
+
+          const owner=
+            playerOwner(p.id,l);
+
+          return`
+
+          <button
+            class="player
+            ${owner?"sold":""}
+            ${p.id===selectedPlayerId?"selected-player":""}"
+            data-player="${p.id}">
+
+            <div class="player-name">
+              ${escapeHtml(p.name)}
+            </div>
+
+            <div class="meta">
+              ${escapeHtml(p.team)}
+              · ${tierLabel(p.tier)}
+              ${p.tactical?" · "+escapeHtml(p.tactical):""}
+            </div>
+
+            ${
+              owner
+              ?`
+              <div class="meta">
+                ✓ VENDUTO a
+                ${escapeHtml(owner.team.name)}
+                · ${credits(owner.record.price)}
+              </div>
+              `
+              :""
+            }
+
+          </button>
+          `;
+
+        }).join("")
+        :`
+        <div class="empty">
+          Nessun giocatore nel database per questo ruolo.
+        </div>
+        `
+      }
+
+      </div>
+
+    </div>
+
+  </div>
+  `;
+
+  const s=
+    document.getElementById("auctionSearch");
+
+  if(s){
+    s.oninput=renderAuction;
+  }
+
+}
+
+
+/* =========================
+   ASSEGNAZIONE
+========================= */
+
+function openBuy(){
+
+  const l=league();
+
+  const player=
+    state.players.find(
+      p=>p.id===selectedPlayerId
+    );
+
+  if(!l||!player){
+    return;
+  }
+
+  if(playerOwner(player.id,l)){
+    alert("Giocatore già assegnato.");
+    return;
+  }
+
+  document.getElementById(
+    "buyPlayerName"
+  ).textContent=
+    player.name+" · "+player.team;
+
+  document.getElementById(
+    "buyPrice"
+  ).value=1;
+
+  document.getElementById(
+    "buyOwner"
+  ).innerHTML=
+    l.teams.map(team=>`
+      <option value="${team.id}">
+        ${escapeHtml(team.name)}
+        · ${credits(team.budgetLeft)}
+      </option>
+    `).join("");
+
+  openModal("buyModal");
+}
+
+function confirmBuy(){
+
+  const l=league();
+
+  const player=
+    state.players.find(
+      p=>p.id===selectedPlayerId
+    );
+
+  if(!l||!player){
+    return;
+  }
+
+  const team=
+    l.teams.find(
+      t=>t.id===
+      document.getElementById("buyOwner").value
+    );
+
+  const price=
+    Math.max(
+      1,
+      Number(
+        document.getElementById("buyPrice").value
+      )||1
+    );
+
+  if(price>team.budgetLeft){
+
+    alert("Budget insufficiente.");
+    return;
+  }
+
+  if(
+    team.isMine &&
+    roleCount(team,player.role)>=l.slots[player.role]
+  ){
+
+    alert(
+      "Hai già completato gli slot di questo ruolo."
+    );
+
+    return;
+  }
+
+  team.budgetLeft-=price;
+
+  team.roster.push({
+    playerId:player.id,
+    price,
+    timestamp:Date.now()
+  });
+
+  saveState();
+
+  closeModal("buyModal");
+
+  renderAll();
+}
+
+
+/* =========================
+   ROSE
+========================= */
+
+function renderRoster(){
+
+  const host=
+    document.getElementById("rosterHost");
+
+  const l=league();
+
+  if(!l){
+
+    host.innerHTML=
+      '<div class="card empty">'+
+      'Nessuna lega selezionata.'+
+      '</div>';
+
+    return;
+  }
+
+  host.innerHTML=`
+
+  <div class="card">
+
+  <h1>Rose della lega</h1>
+
+  <div class="team-grid">
+
+  ${l.teams.map(team=>{
+
+    const rows=
+      team.roster.map(rec=>{
+
+        const p=
+          state.players.find(
+            x=>x.id===rec.playerId
+          );
+
+        if(!p){
+          return"";
+        }
+
+        return`
+          <tr>
+            <td>
+              <span class="role">${p.role}</span>
+            </td>
+
+            <td>
+              <b>${escapeHtml(p.name)}</b>
+              <div class="meta">
+                ${escapeHtml(p.team)}
+              </div>
+            </td>
+
+            <td>
+              ${credits(rec.price)}
+            </td>
+          </tr>
+        `;
+
+      }).join("");
+
+    return`
+
+    <div class="team-card">
+
+      <div class="team-head">
+
+        <div>
+          <b>
+            ${escapeHtml(team.name)}
+            ${team.isMine?" · TU":""}
+          </b>
+        </div>
+
+        <b>${credits(team.budgetLeft)}</b>
+
+      </div>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>R</th>
+            <th>Giocatore</th>
+            <th>Prezzo</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${
+            rows||
+            '<tr><td colspan="3" class="muted">'+
+            'Nessun acquisto'+
+            '</td></tr>'
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+    `;
+
+  }).join("")}
+
+  </div>
+  </div>
+  `;
+}
+
+
+/* =========================
+   DATABASE GIOCATORI
+========================= */
+
+function renderPlayers(){
+
+  const search=
+    (
+      document.getElementById("playerSearch")
+      ?.value||""
+    ).toLowerCase();
+
+  const players=
+    state.players.filter(p=>
+      !search ||
+      p.name.toLowerCase().includes(search) ||
+      p.team.toLowerCase().includes(search)
+    );
+
+  document.getElementById(
+    "playersTable"
+  ).innerHTML=
+
+  players.length
+  ?`
+  <table>
+
+    <thead>
+      <tr>
+        <th>R</th>
+        <th>Giocatore</th>
+        <th>Fascia</th>
+        <th>Titolarità</th>
+        <th>Ruolo reale</th>
+        <th>Q.</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    ${players.map(p=>`
+
+      <tr>
+
+        <td>
+          <span class="role">${p.role}</span>
+        </td>
+
+        <td>
+          <b>${escapeHtml(p.name)}</b>
+          <div class="meta">
+            ${escapeHtml(p.team)}
+          </div>
+        </td>
+
+        <td>${tierLabel(p.tier)}</td>
+
+        <td>
+          ${escapeHtml(p.starter||"—")}
+        </td>
+
+        <td>
+          ${escapeHtml(p.tactical||"—")}
+        </td>
+
+        <td>
+          ${credits(p.quote||0)}
+        </td>
+
+      </tr>
+
+    `).join("")}
+
+    </tbody>
+
+  </table>
+  `
+  :`
+  <div class="empty">
+    Database giocatori vuoto.
+  </div>
+  `;
+
+  const input=
+    document.getElementById("playerSearch");
+
+  if(input){
+    input.oninput=renderPlayers;
+  }
+}
+
+
+/* =========================
+   CSV
+========================= */
+
+function parseCSV(text){
+
+  const lines=
+    text
+    .replace(/\r/g,"")
+    .split("\n")
+    .filter(Boolean);
+
+  if(lines.length<2){
+    return[];
+  }
+
+  function split(line){
+
+    const out=[];
+
+    let current="";
+    let quoted=false;
+
+    for(let i=0;i<line.length;i++){
+
+      const char=line[i];
+
+      if(char==='"'){
+
+        if(
+          quoted &&
+          line[i+1]==='"'
+        ){
+          current+='"';
+          i++;
+        }else{
+          quoted=!quoted;
+        }
+
+      }else if(
+        (char===","||char===";") &&
+        !quoted
+      ){
+
+        out.push(current.trim());
+        current="";
+
+      }else{
+
+        current+=char;
+
+      }
+    }
+
+    out.push(current.trim());
+
+    return out;
+  }
+
+  const headers=
+    split(lines[0])
+    .map(x=>x.toLowerCase());
+
+  return lines.slice(1)
+  .map(row=>{
+
+    const values=split(row);
+
+    const obj={};
+
+    headers.forEach(
+      (header,i)=>{
+        obj[header]=values[i]||"";
+      }
+    );
+
+    const role=
+      (
+        obj.role||
+        obj.ruolo||
+        ""
+      ).toUpperCase();
+
+    const name=
+      obj.name||
+      obj.nome||
+      "";
+
+    if(
+      !name ||
+      !["P","D","C","A"].includes(role)
+    ){
+      return null;
+    }
+
+    return{
+      id:uid("player"),
+      name,
+      team:
+        obj.team||
+        obj.squadra||
+        "",
+      role,
+      tier:
+        (
+          obj.tier||
+          obj.fascia||
+          "value"
+        ).toLowerCase(),
+      starter:
+        obj.starter||
+        obj.titolarita||
+        "",
+      tactical:
+        obj.tactical||
+        obj.ruoloreale||
+        obj.ruolo_reale||
+        "",
+      quote:
+        Number(
+          obj.quote||
+          obj.quotazione||
+          0
+        )||0
+    };
+
+  })
+  .filter(Boolean);
+}
+
+function importCSV(file){
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+
+    const imported=
+      parseCSV(reader.result);
+
+    if(!imported.length){
+
+      alert("CSV non riconosciuto.");
+      return;
+    }
+
+    state.players=imported;
+
+    saveState();
+
+    renderAll();
+
+    alert(
+      "Importati "+
+      imported.length+
+      " giocatori."
+    );
+  };
+
+  reader.readAsText(file);
+}
+
+
+/* =========================
+   DOWNLOAD / BACKUP
+========================= */
+
+function download(name,text,type){
+
+  const blob=
+    new Blob(
+      [text],
+      {type}
+    );
+
+  const url=
+    URL.createObjectURL(blob);
+
+  const a=
+    document.createElement("a");
+
+  a.href=url;
+  a.download=name;
+
+  a.click();
+
+  setTimeout(
+    ()=>URL.revokeObjectURL(url),
+    1000
+  );
+}
+
+function exportCSV(){
+
+  const rows=[
+
+    [
+      "name",
+      "team",
+      "role",
+      "tier",
+      "starter",
+      "tactical",
+      "quote"
+    ],
+
+    ...state.players.map(p=>[
+      p.name,
+      p.team,
+      p.role,
+      p.tier,
+      p.starter,
+      p.tactical,
+      p.quote
+    ])
+
+  ];
+
+  const csv=
+    rows.map(row=>
+      row.map(value=>
+        `"${String(value??"")
+        .replace(/"/g,'""')}"`
+      ).join(",")
+    ).join("\n");
+
+  download(
+    "fantasquadra-giocatori.csv",
+    csv,
+    "text/csv;charset=utf-8"
+  );
+}
+
+function backup(){
+
+  download(
+    "fantasquadra-backup.json",
+    JSON.stringify(state,null,2),
+    "application/json"
+  );
+}
+
+function restore(file){
+
+  const reader=
+    new FileReader();
+
+  reader.onload=()=>{
+
+    try{
+
+      const data=
+        JSON.parse(reader.result);
+
+      if(
+        !Array.isArray(data.leagues) ||
+        !Array.isArray(data.players)
+      ){
+        throw new Error();
+      }
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+      );
+
+      location.reload();
+
+    }catch(e){
+
+      alert("Backup non valido.");
+
+    }
+
+  };
+
+  reader.readAsText(file);
+}
+
+
+/* =========================
+   NAVIGAZIONE
+========================= */
+
+function switchView(name){
+
+  document.querySelectorAll(
+    ".view"
+  ).forEach(
+    v=>v.classList.add("hidden")
+  );
+
+  document.getElementById(
+    "view-"+name
+  ).classList.remove("hidden");
+
+  document.querySelectorAll(
+    ".nav-btn"
+  ).forEach(
+    btn=>
+      btn.classList.toggle(
+        "active",
+        btn.dataset.view===name
+      )
+  );
+
+  if(name==="auction"){
+    renderAuction();
+  }
+
+  if(name==="roster"){
+    renderRoster();
+  }
+
+  if(name==="players"){
+    renderPlayers();
+  }
+}
+
+
+/* =========================
+   EVENTI
+========================= */
+
+document.addEventListener(
+  "click",
+  event=>{
+
+    const button=
+      event.target.closest("button");
+
+    if(!button){
+      return;
+    }
+
+    if(button.dataset.view){
+      switchView(button.dataset.view);
+    }
+
+    if(button.dataset.close){
+      closeModal(button.dataset.close);
+    }
+
+    if(button.dataset.openLeague){
+
+      state.activeLeagueId=
+        button.dataset.openLeague;
+
+      saveState();
+      renderAll();
+    }
+
+    if(button.dataset.deleteLeague){
+      deleteLeague(
+        button.dataset.deleteLeague
+      );
+    }
+
+    if(button.dataset.role){
+
+      activeRole=
+        button.dataset.role;
+
+      selectedPlayerId=null;
+
+      renderAuction();
+    }
+
+    if(button.dataset.player){
+
+      selectedPlayerId=
+        button.dataset.player;
+
+      renderAuction();
+    }
+
+    if(button.id==="buyButton"){
+      openBuy();
+    }
+
+    if(button.id==="askAI"){
+      requestAIStrategy();
+    }
+
+  }
+);
+
+
+document.getElementById(
+  "newLeagueTop"
+).onclick=createLeague;
+
+document.getElementById(
+  "newLeagueHome"
+).onclick=createLeague;
+
+document.getElementById(
+  "saveLeague"
+).onclick=saveLeague;
+
+document.getElementById(
+  "confirmBuy"
+).onclick=confirmBuy;
+
+document.getElementById(
+  "csvInput"
+).onchange=e=>{
+
+  if(e.target.files[0]){
+    importCSV(e.target.files[0]);
+  }
+
+};
+
+document.getElementById(
+  "exportCsv"
+).onclick=exportCSV;
+
+document.getElementById(
+  "backupBtn"
+).onclick=backup;
+
+document.getElementById(
+  "restoreInput"
+).onchange=e=>{
+
+  if(e.target.files[0]){
+    restore(e.target.files[0]);
+  }
+
+};
+
+document.getElementById(
+  "resetBtn"
+).onclick=()=>{
+
+  if(
+    confirm(
+      "Cancellare tutti i dati locali di FantaSquadra?"
+    )
+  ){
+
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+    location.reload();
+  }
+
+};
+
+
+/* =========================
+   AVVIO
+========================= */
+
+function renderAll(){
+  renderHome();
+  renderAuction();
+  renderRoster();
+  renderPlayers();
+}
+
 renderAll();
+
 })();
 </script>
+
 </body>
-</html> ho
+</html>
